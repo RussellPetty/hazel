@@ -12,10 +12,10 @@ app.all('/check-availability', async (req, res) => {
 
   console.log(`[${new Date().toISOString()}] Request received${agent ? ` from agent: ${agent}` : ''}`);
 
-  // Wait 5 seconds
-  await new Promise(resolve => setTimeout(resolve, 5000));
+  // Wait 3 seconds
+  await new Promise(resolve => setTimeout(resolve, 3000));
 
-  console.log(`[${new Date().toISOString()}] Responding after 5 seconds`);
+  console.log(`[${new Date().toISOString()}] Responding after 3 seconds`);
   res.json({
     message: "they're not available",
     agent: agent || "unknown"
