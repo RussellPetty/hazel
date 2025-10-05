@@ -7,13 +7,19 @@ app.use(express.json());
 
 // Endpoint that waits 5 seconds then responds
 app.all('/check-availability', async (req, res) => {
-  console.log(`[${new Date().toISOString()}] Request received`);
+  // Extract agent parameter from either query params or body
+  const agent = req.body?.agent || req.query?.agent;
+
+  console.log(`[${new Date().toISOString()}] Request received${agent ? ` from agent: ${agent}` : ''}`);
 
   // Wait 5 seconds
   await new Promise(resolve => setTimeout(resolve, 5000));
 
   console.log(`[${new Date().toISOString()}] Responding after 5 seconds`);
-  res.json({ message: "they're not available" });
+  res.json({
+    message: "they're not available",
+    agent: agent || "unknown"
+  });
 });
 
 // Health check endpoint
